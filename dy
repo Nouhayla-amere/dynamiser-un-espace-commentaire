@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+  <title>Commentaires</title>
+</head>
+<body class="antialiased font-sans bg-white">
+  <div>
+    <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6">      
+      <div class="bg-white">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Commentaires</h3>
+          <div id="comment-list" class="mt-5">
+            <div class="comment-item border-b border-gray-200 py-5">
+              <p class="text-sm text-gray-600">Super article !</p>
+            </div>
+          </div>
+        </div>
+        <form id="comment-form" class="mt-6">
+          <div>
+            <label for="comment" class="block text-sm font-medium text-gray-700">Votre commentaire</label>
+            <textarea id="comment" name="comment" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+            <p id="error-message" class="text-red-600 text-sm mt-2 hidden">Veuillez remplir le champ avant d'envoyer.</p>
+          </div>
+          <div class="mt-4">
+            <button type="button" id="submit-button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Envoyer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('submit-button').addEventListener('click', function() {
+      const commentInput = document.getElementById('comment');
+      const errorMessage = document.getElementById('error-message');
+      const commentList = document.getElementById('comment-list');
+
+      // Vérifier si le champ est vide
+      if (commentInput.value.trim() === '') {
+        errorMessage.classList.remove('hidden');
+        return;
+      }
+
+      // Cacher le message d'erreur si tout va bien
+      errorMessage.classList.add('hidden');
+
+      // Créer un nouvel élément de commentaire
+      const newComment = document.createElement('div');
+      newComment.classList.add('comment-item', 'border-b', 'border-gray-200', 'py-5');
+      newComment.innerHTML = `<p class="text-sm text-gray-600">${commentInput.value}</p>`;
+
+      // Ajouter le nouveau commentaire à la liste
+      commentList.appendChild(newComment);
+
+      // Réinitialiser le formulaire
+      commentInput.value = '';
+    });
+  </script>
+</body>
+</html>
